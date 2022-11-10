@@ -6,9 +6,9 @@ LABEL org.opencontainers.image.title="Basic ML - base image"
 
 SHELL ["/bin/bash", "-c"]
 
-ENV PIP_ROOT_USER_ACTION = "ignore"
-ENV TINI_VERSION = "v0.19.0"
-ENV IMAGE_TIME_ZONE = "Europe/Moscow"
+ENV PIP_ROOT_USER_ACTION="ignore"
+ENV TINI_VERSION="v0.19.0"
+ENV IMAGE_TIME_ZONE="Europe/Moscow"
 
 RUN ln -snf /usr/share/zoneinfo/${IMAGE_TIME_ZONE} /etc/localtime && echo ${IMAGE_TIME_ZONE} > /etc/timezone
 
