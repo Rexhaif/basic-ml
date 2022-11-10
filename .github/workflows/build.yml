@@ -20,7 +20,7 @@ jobs:
             tag: base-cuda11.6-devel
           - image: 11.6.0-runtime-ubuntu20.04
             tag: base-cuda11.6-runtime
-          - image: 11.6.0-base
+          - image: 11.6.0-base-ubuntu20.04
             tag: base-cuda11.6
           
     steps:
