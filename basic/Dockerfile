@@ -12,11 +12,13 @@ ENV IMAGE_TIME_ZONE="Europe/Moscow"
 
 RUN ln -snf /usr/share/zoneinfo/${IMAGE_TIME_ZONE} /etc/localtime && echo ${IMAGE_TIME_ZONE} > /etc/timezone
 
+RUN if ! command -v gpg &> /dev/null; then apt-get update && apt-get install -y --no-install-recommends gnupg; fi
+
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv A4B469963BF863CC
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
         software-properties-common \
-        wget && \ 
+        wget && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \ 
     apt-get install --yes --no-install-recommends \
