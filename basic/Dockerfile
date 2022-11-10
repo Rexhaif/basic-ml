@@ -28,7 +28,9 @@ RUN apt-get update && \
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
 
-RUN wget --progress=dot:mega https://bootstrap.pypa.io/get-pip.py && python ./get-pip.py
+RUN wget --progress=dot:mega https://bootstrap.pypa.io/get-pip.py && python ./get-pip.py && rm -rf ./get-pip.py
+
+RUN rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /tini.asc
