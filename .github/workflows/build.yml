@@ -9,6 +9,20 @@ on:
 jobs:
   base-cuda116-cudnn8-devel:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - image: 11.6.0-cudnn8-devel-ubuntu20.04
+            tag: base-cuda11.6-cudnn8-devel
+          - image: 11.6.0-cudnn8-runtime-ubuntu20.04
+            tag: base-cuda11.6-cudnn8-runtime
+          - image: 11.6.0-devel-ubuntu20.04
+            tag: base-cuda11.6-devel
+          - image: 11.6.0-runtime-ubuntu20.04
+            tag: base-cuda11.6-runtime
+          - image: 11.6.0-base
+            tag: base-cuda11.6
+          
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -23,107 +37,15 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build & push CUDA11.6-CuDNN8-devel
+        env:
+          IMAGE: ${{ matrix.image }}
+          TAG: ${{ matrix.tag }}
+        working-directory: ./basic
         run: |
           docker buildx build \
             --platform linux/amd64 \
             --push \
-            --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04 \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-cudnn8-devel \
-            --file Dockerfile \
-            .
-  base-cuda116-cudnn8-runtime:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build & push CUDA11.6-CuDNN8-runtime
-        run: |
-          docker buildx build \
-            --platform linux/amd64 \
-            --push \
-            --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-cudnn8-runtime-ubuntu20.04 \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-cudnn8-runtime \
-            --file Dockerfile \
-            .
-  base-cuda116:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
-      - name: Build & push CUDA11.6-base
-        run: |
-          docker buildx build \
-            --platform linux/amd64 \
-            --push \
-            --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-base-ubuntu20.04 \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6 \
-            --file Dockerfile \
-            .
-  base-cuda116-runtime:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build & push CUDA11.6-runtime
-        run: |
-          docker buildx build \
-            --platform linux/amd64 \
-            --push \
-            --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-runtime-ubuntu20.04 \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-runtime \
-            --file Dockerfile \
-            .
-      
-  base-cuda116-devel:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build & push CUDA11.6-devel
-        run: |
-          docker buildx build \
-            --platform linux/amd64 \
-            --push \
-            --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-devel-ubuntu20.04 \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-devel \
+            --build-arg BASE_IMAGE=nvidia/cuda:$IMAGE \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:$TAG \
             --file Dockerfile \
             .
