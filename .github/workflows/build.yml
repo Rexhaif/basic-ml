@@ -7,21 +7,23 @@ on:
     branches: [ main ]
 
 jobs:
-  base-cuda116-cudnn8-devel:
+  base-image:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
-          - image: 11.6.0-cudnn8-devel-ubuntu20.04
+          - image: nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04
             tag: base-cuda11.6-cudnn8-devel
-          - image: 11.6.0-cudnn8-runtime-ubuntu20.04
+          - image: nvidia/cuda:11.6.0-cudnn8-runtime-ubuntu20.04
             tag: base-cuda11.6-cudnn8-runtime
-          - image: 11.6.0-devel-ubuntu20.04
+          - image: nvidia/cuda:11.6.0-devel-ubuntu20.04
             tag: base-cuda11.6-devel
-          - image: 11.6.0-runtime-ubuntu20.04
+          - image: nvidia/cuda:11.6.0-runtime-ubuntu20.04
             tag: base-cuda11.6-runtime
-          - image: 11.6.0-base-ubuntu20.04
+          - image: nvidia/cuda:11.6.0-base-ubuntu20.04
             tag: base-cuda11.6
+          - image: ubuntu:20.04
+            tag: base-cpu
           
     steps:
       - name: Checkout
@@ -36,7 +38,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build & push CUDA11.6-CuDNN8-devel
+      - name: Build & push
         env:
           IMAGE: ${{ matrix.image }}
           TAG: ${{ matrix.tag }}
@@ -45,7 +47,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64 \
             --push \
-            --build-arg BASE_IMAGE=nvidia/cuda:$IMAGE \
+            --build-arg BASE_IMAGE=$IMAGE \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:$TAG \
             --file Dockerfile \
             .
