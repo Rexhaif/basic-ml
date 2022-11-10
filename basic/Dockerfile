@@ -6,9 +6,11 @@ LABEL org.opencontainers.image.title="Basic ML - base image"
 
 SHELL ["/bin/bash", "-c"]
 
-ENV PIP_ROOT_USER_ACTION=ignore
+ENV PIP_ROOT_USER_ACTION = "ignore"
+ENV TINI_VERSION = "v0.19.0"
+ENV IMAGE_TIME_ZONE = "Europe/Moscow"
 
-RUN ln -snf /usr/share/zoneinfo/Europe/Moscow /etc/localtime && echo "Europe/Moscow" > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/${IMAGE_TIME_ZONE} /etc/localtime && echo ${IMAGE_TIME_ZONE} > /etc/timezone
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv A4B469963BF863CC
 RUN apt-get update && \
@@ -26,7 +28,6 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
 
 RUN wget --progress=dot:mega https://bootstrap.pypa.io/get-pip.py && python ./get-pip.py
 
-ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc /tini.asc
 RUN gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
