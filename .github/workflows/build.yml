@@ -3,9 +3,10 @@ name: Build
 on:
   push:
     branches:
-      - master
-    paths-ignore:
-      - '**/README.md'
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   base-image:
