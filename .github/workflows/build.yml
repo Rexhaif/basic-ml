@@ -29,7 +29,7 @@ jobs:
             --push \
             --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04 \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-cudnn8-devel \
-            --file Dockerfile.cuda11.6-cudnn8-devel \
+            --file Dockerfile \
             .
   base-cuda116-cudnn8-runtime:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
             --push \
             --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-cudnn8-runtime-ubuntu20.04 \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-cudnn8-runtime \
-            --file Dockerfile.cuda11.6-cudnn8-runtime \
+            --file Dockerfile \
             .
   base-cuda116:
     runs-on: ubuntu-latest
@@ -77,7 +77,7 @@ jobs:
             --push \
             --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-base-ubuntu20.04 \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6 \
-            --file Dockerfile.cuda11.6 \
+            --file Dockerfile \
             .
   base-cuda116-runtime:
     runs-on: ubuntu-latest
@@ -100,7 +100,7 @@ jobs:
             --push \
             --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-runtime-ubuntu20.04 \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-runtime \
-            --file Dockerfile.cuda11.6-runtime \
+            --file Dockerfile \
             .
       
   base-cuda116-devel:
@@ -125,5 +125,5 @@ jobs:
             --push \
             --build-arg BASE_IMAGE=nvidia/cuda:11.6.0-devel-ubuntu20.04 \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-devel \
-            --file Dockerfile.cuda11.6-cudnn8-devel \
+            --file Dockerfile \
             .
