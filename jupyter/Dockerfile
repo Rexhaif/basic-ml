@@ -13,7 +13,8 @@ RUN apt update && \
         screen \
         bat \
         curl \
-        aria2 && \
+        aria2 \
+        build-essential && \
     pip install -U \
         ipython \
         notebook \
