@@ -1,4 +1,4 @@
-autoload -U compinit promptinit
+autoload -Uz compinit promptinit
 
 promptinit
 prompt pure
