@@ -61,4 +61,4 @@ RUN apt-get clean && \
 EXPOSE 8888
 WORKDIR /workspace
 RUN mkdir -p ./notebooks && mkdir -p ./data
-CMD [ "/root/run_jupyter.sh" ]
+CMD [ "bash", "/root/run_jupyter.sh" ]
