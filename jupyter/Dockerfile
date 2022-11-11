@@ -28,6 +28,8 @@ RUN apt install -y bash && \
     sh ~/install.sh -y && \
     echo 'starship init fish | source' >> ~/.zshrc
 
+ADD ./starship.toml /root/.config/starship.toml
+
 RUN apt-get clean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* ~/* && \
