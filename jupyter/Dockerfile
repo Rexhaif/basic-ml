@@ -48,7 +48,17 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN cargo install exa
 
+ARG DEFAULT_KEY="change-me-asap"
+ENV PASSWORD=${DEFAULT_KEY}
+ADD ./run_jupyter.sh /root/run_jupyter.sh
+RUN chmod +x /root/run_jupyter.sh
+
 RUN apt-get clean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* ~/* && \
     rm -rf  ~/install.sh
+
+EXPOSE 8888
+WORKDIR /workspace
+RUN mkdir -p ./notebooks && mkdir -p ./data
+CMD [ "/root/run_jupyter.sh" ]
