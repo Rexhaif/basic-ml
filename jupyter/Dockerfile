@@ -4,6 +4,7 @@ FROM ${BASE_IMAGE}
 LABEL org.opencontainers.image.authors="Daniil Larionov"
 LABEL org.opencontainers.image.title="Basic ML - Jupyter container"
 
+
 RUN apt update && \
     apt install --yes --no-install-recommends \
         jq \
@@ -57,6 +58,9 @@ ARG DEFAULT_KEY="change-me-asap"
 ENV PASSWORD=${DEFAULT_KEY}
 COPY ./run_jupyter.sh /root
 RUN chmod +x /root/run_jupyter.sh
+
+RUN chsh -s /bin/bash root
+ENV SHELL /bin/bash
 
 EXPOSE 8888
 WORKDIR /workspace
