@@ -59,19 +59,13 @@ jobs:
     needs: base-image
     strategy:
       matrix:
-        include:
-          - image: base-cuda11.6-cudnn8-devel
-            tag: jupyter-cuda11.6-cudnn8-devel
-          - image: base-cuda11.6-cudnn8-runtime
-            tag: jupyter-cuda11.6-cudnn8-runtime
-          - image: base-cuda11.6-devel
-            tag: jupyter-cuda11.6-devel
-          - image: base-cuda11.6-runtime
-            tag: jupyter-cuda11.6-runtime
-          - image: base-cuda11.6
-            tag: jupyter-cuda11.6
-          - image: base-cpu
-            tag: jupyter-cpu
+        image:
+          - cuda11.6-cudnn8-devel
+          - cuda11.6-cudnn8-runtime
+          - cuda11.6-devel
+          - cuda11.6-runtime
+          - cuda11.6
+          - cpu
           
     steps:
       - name: Checkout
@@ -89,13 +83,12 @@ jobs:
       - name: Build & push
         env:
           IMAGE: ${{ matrix.image }}
-          TAG: ${{ matrix.tag }}
         working-directory: ./jupyter
         run: |
           docker buildx build \
             --platform linux/amd64 \
             --push \
-            --build-arg BASE_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:$IMAGE \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:$TAG \
+            --build-arg BASE_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-$IMAGE \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:jupyter-$TAG \
             --file Dockerfile \
             .
