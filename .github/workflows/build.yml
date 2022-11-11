@@ -59,7 +59,7 @@ jobs:
     needs: base-image
     strategy:
       matrix:
-        image:
+        tag:
           - cuda11.6-cudnn8-devel
           - cuda11.6-cudnn8-runtime
           - cuda11.6-devel
@@ -82,13 +82,13 @@ jobs:
 
       - name: Build & push
         env:
-          IMAGE: ${{ matrix.image }}
+          TAG: ${{ matrix.tag }}
         working-directory: ./jupyter
         run: |
           docker buildx build \
             --platform linux/amd64 \
             --push \
-            --build-arg BASE_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-$IMAGE \
+            --build-arg BASE_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-$TAG \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:jupyter-$TAG \
             --file Dockerfile \
             .
