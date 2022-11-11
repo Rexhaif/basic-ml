@@ -8,7 +8,11 @@ RUN apt update && \
     apt install --yes --no-install-recommends \
         jq \
         git \
-        neovim && \
+        neovim \
+        openssh-client \
+        screen \
+        bat \
+        exa && \
     pip install -U \
         ipython \
         notebook \
@@ -34,6 +38,8 @@ RUN wget -O ~/install.sh --progress=dot:mega https://starship.rs/install.sh && \
     echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 ADD ./starship.toml /root/.config/starship.toml
+RUN echo "termcapinfo xterm* ti@:te@" >> ~/.screenrc
+RUN echo "alias cat='batcat --paging=never'" >> ~/.bashrc
 
 RUN apt-get clean && \
     apt-get autoremove && \
