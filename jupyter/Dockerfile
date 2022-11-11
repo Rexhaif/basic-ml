@@ -50,7 +50,7 @@ RUN cargo install exa
 
 ARG DEFAULT_KEY="change-me-asap"
 ENV PASSWORD=${DEFAULT_KEY}
-ADD ./run_jupyter.sh /root/run_jupyter.sh
+COPY ./run_jupyter.sh /root/run_jupyter.sh
 RUN chmod +x /root/run_jupyter.sh
 
 RUN apt-get clean && \
@@ -61,4 +61,4 @@ RUN apt-get clean && \
 EXPOSE 8888
 WORKDIR /workspace
 RUN mkdir -p ./notebooks && mkdir -p ./data
-CMD [ "bash", "~/run_jupyter.sh" ]
+CMD [ "bash", "/root/run_jupyter.sh" ]
