@@ -4,6 +4,9 @@ format = """
 [container]
 disabled = true
 
+[time]
+disabled = false
+
 [memory_usage]
 disabled = false
 threshold = -1
