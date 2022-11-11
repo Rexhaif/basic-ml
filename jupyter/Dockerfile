@@ -26,7 +26,7 @@ RUN apt install -y bash && \
     chsh -s /bin/bash root && \
     wget -O ~/install.sh --progress=dot:mega https://starship.rs/install.sh && \
     sh ~/install.sh -y && \
-    echo 'starship init fish | source' >> ~/.zshrc
+    echo 'starship init zsh | source' >> ~/.zshrc && echo "" >> ~/.zshrc
 
 ADD ./starship.toml /root/.config/starship.toml
 
