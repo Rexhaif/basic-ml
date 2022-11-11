@@ -15,6 +15,7 @@ RUN apt update && \
         bat \
         curl \
         aria2 \
+        htop \
         build-essential && \
     pip install -U \
         ipython \
