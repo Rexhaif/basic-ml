@@ -4,7 +4,9 @@ FROM ${BASE_IMAGE}
 LABEL org.opencontainers.image.authors="Daniil Larionov"
 LABEL org.opencontainers.image.title="Basic ML - Jupyter container"
 
-RUN apt update && apt install --yes --no-install-recommends jq git && pip install -U ipython notebook jupyterlab
+RUN apt update && apt install --yes --no-install-recommends jq git zsh && pip install -U ipython notebook jupyterlab
+
+SHELL ["/bin/zsh", "-c"]
 
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 18.12.1
@@ -22,9 +24,9 @@ RUN jupyter notebook --generate-config && \
 
 RUN apt install -y bash && \
     chsh -s /bin/bash root && \
-    wget -O ~/install.sh https://starship.rs/install.sh && \
+    wget -O ~/install.sh --progress=dot:mega https://starship.rs/install.sh && \
     sh ~/install.sh -y && \
-    echo 'eval "$(starship init bash)"' >> ~/.bashrc
+    echo 'starship init fish | source' >> ~/.zshrc
 
 RUN apt-get clean && \
     apt-get autoremove && \

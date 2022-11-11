@@ -1,0 +1,14 @@
+format = """
+(bold green)$directory$gcloud$git_status$character
+"""
+
+right_format = """(bold green)$time$cmd_duration$memory_usage"""
+[container]
+disabled = true
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = " "
+format = "[${ram}]($style)" 
+style = "bold dimmed cyan"
