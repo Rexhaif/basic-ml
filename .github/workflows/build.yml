@@ -60,17 +60,17 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-cudnn8-devel
+          - image: base-cuda11.6-cudnn8-devel
             tag: jupyter-cuda11.6-cudnn8-devel
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-cudnn8-runtime
+          - image: base-cuda11.6-cudnn8-runtime
             tag: jupyter-cuda11.6-cudnn8-runtime
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-devel
+          - image: base-cuda11.6-devel
             tag: jupyter-cuda11.6-devel
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6-runtime
+          - image: base-cuda11.6-runtime
             tag: jupyter-cuda11.6-runtime
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cuda11.6
+          - image: base-cuda11.6
             tag: jupyter-cuda11.6
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-cpu
+          - image: base-cpu
             tag: jupyter-cpu
           
     steps:
@@ -95,7 +95,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64 \
             --push \
-            --build-arg BASE_IMAGE=$IMAGE \
+            --build-arg BASE_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:$IMAGE \
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:$TAG \
             --file Dockerfile \
             .
