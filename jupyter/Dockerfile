@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.title="Basic ML - Jupyter container"
 
 RUN apt update && apt install --yes --no-install-recommends jq git zsh && pip install -U ipython notebook jupyterlab
 
-SHELL ["/bin/zsh", "-c"]
+SHELL ["/usr/bin/zsh", "-c"]
 
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 18.12.1
