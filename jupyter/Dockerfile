@@ -22,11 +22,9 @@ RUN jupyter notebook --generate-config && \
     jupyter nbextension enable --py widgetsnbextension && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
-RUN apt install -y bash && \
-    chsh -s /bin/bash root && \
-    wget -O ~/install.sh --progress=dot:mega https://starship.rs/install.sh && \
+RUN wget -O ~/install.sh --progress=dot:mega https://starship.rs/install.sh && \
     sh ~/install.sh -y && \
-    echo 'starship init zsh | source' >> ~/.zshrc && echo "" >> ~/.zshrc
+    echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
 ADD ./starship.toml /root/.config/starship.toml
 
