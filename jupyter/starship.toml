@@ -1,8 +1,6 @@
 format = """
-(bold green)$directory$gcloud$git_status$character
+(bold green)$directory$time$cmd_duration$memory_usage$git_status$character
 """
-
-right_format = """(bold green)$time$cmd_duration$memory_usage"""
 [container]
 disabled = true
 

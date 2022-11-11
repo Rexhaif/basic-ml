@@ -8,15 +8,12 @@ RUN apt update && \
     apt install --yes --no-install-recommends \
         jq \
         git \
-        zsh \
         neovim && \
     pip install -U \
         ipython \
         notebook \
         jupyterlab
 
-ADD ./zshrc.sh /root/.zshrc
-SHELL ["/usr/bin/zsh", "-c"]
 
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 18.12.1
@@ -34,7 +31,7 @@ RUN jupyter notebook --generate-config && \
 
 RUN wget -O ~/install.sh --progress=dot:mega https://starship.rs/install.sh && \
     sh ~/install.sh -y && \
-    echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+    echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 ADD ./starship.toml /root/.config/starship.toml
 
