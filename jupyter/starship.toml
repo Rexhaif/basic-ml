@@ -1,5 +1,5 @@
 format = """
-(bold green)$directory$memory_usage$time$cmd_duration $git_status$character
+(bold green)$directory$time$cmd_duration$git_status$memory_usage $character
 """
 [container]
 disabled = true
