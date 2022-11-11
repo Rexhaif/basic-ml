@@ -42,7 +42,9 @@ ADD ./starship.toml /root/.config/starship.toml
 RUN echo "termcapinfo xterm* ti@:te@" >> ~/.screenrc
 RUN echo "alias cat='batcat --paging=never'" >> ~/.bashrc
 
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 RUN cargo install exa
 
 RUN apt-get clean && \
