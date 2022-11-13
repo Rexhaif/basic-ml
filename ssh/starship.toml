@@ -1,0 +1,15 @@
+format = """
+(bold green)$directory$time$cmd_duration$git_status$memory_usage $character
+"""
+[container]
+disabled = true
+
+[time]
+disabled = false
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = " "
+format = "[${ram}]($style)" 
+style = "bold dimmed cyan"
