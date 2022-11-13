@@ -40,7 +40,7 @@ RUN apt-get clean && \
 RUN chsh -s /bin/bash root
 ENV SHELL /bin/bash
 
-EXPOSE 8888
+EXPOSE 22
 WORKDIR /root
 RUN mkdir -p ./notebooks && mkdir -p ./data
 
