@@ -43,5 +43,5 @@ ENV SHELL /bin/bash
 EXPOSE 22
 WORKDIR /root
 RUN mkdir -p ./notebooks && mkdir -p ./data
-
-CMD ["service", "ssh", "start", "&&", "journalctl", "-f", "-u", "ssh"]
+RUN mkdir -p /run/sshd
+CMD /usr/sbin/sshd -d -p 2222
