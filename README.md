@@ -30,8 +30,10 @@ All images are divided into two categories:
         Image with pre-installed jupyter as well as multiple useful utilities. Jupyter Server is protected with password by default. You could either use default password or set your own via `docker run -e PASSWORD="..." ...`. Exposed port is 8888.
 
     [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/rexhaif/basic-ml/tags?page=1&name=jupyter)
+    
     2.2 SSH-accessible environemnts
         Image with pre-installed and configured openssh-server and a script, that populates the system with either authentication option: password, single public key or whole ~/.ssh/authroized_keys file
+        
     [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/rexhaif/basic-ml/tags?page=1&name=ssh)
 
 
