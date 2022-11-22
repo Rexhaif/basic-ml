@@ -30,6 +30,9 @@ All images are divided into two categories:
         Image with pre-installed jupyter as well as multiple useful utilities. Jupyter Server is protected with password by default. You could either use default password or set your own via `docker run -e PASSWORD="..." ...`. Exposed port is 8888.
 
     [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/rexhaif/basic-ml/tags?page=1&name=jupyter)
+    2.2 SSH-accessible environemnts
+        Image with pre-installed and configured openssh-server and a script, that populates the system with either authentication option: password, single public key or whole ~/.ssh/authroized_keys file
+    [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://hub.docker.com/r/rexhaif/basic-ml/tags?page=1&name=ssh)
 
 
 --
@@ -47,3 +50,20 @@ docker run \
     --name basic-ml \
         rexhaif/basic-ml:jupyter-cuda11.6-cudnn8-devel
 ```
+
+To run SSH-accessible container use this script:
+```bash
+docker run \
+    --gpus=all \
+    --ipc=host \
+    -p 2222:22 \
+    -e AUTHORIZED_KEYS="`cat ~/.ssh/authorized_keys`" \
+    -e PUBLIC_KEY="ssh-ec25519 ..." \
+    -e PASSWORD="the-password" \
+    -v `pwd`/projects:/workspace/code \
+    -v `pwd`/data:/workspace/data \
+    -d \
+    --name basic-ml \
+        rexhaif/basic-ml:ssh-cuda11.6-cudnn8-devel
+```
+You can choose any suitable option to configure authentication, either with one of AUTHORIZED_KEYS / PUBLIC_KEY / PASSWORD, or with all of them simultaneously. Port 2222 from `-p 2222:22` can be changed to any port of your choice.
