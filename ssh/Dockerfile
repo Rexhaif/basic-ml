@@ -42,6 +42,10 @@ ENV SHELL /bin/bash
 
 EXPOSE 22
 WORKDIR /root
-RUN mkdir -p ./notebooks && mkdir -p ./data
+RUN mkdir -p ./code && mkdir -p ./data
 RUN mkdir -p /run/sshd
-CMD /usr/sbin/sshd -d -p 22
+
+COPY ./run.sh ./.run.sh
+RUN chmod +x ./.run.sh
+
+CMD ./.run.sh
