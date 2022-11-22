@@ -12,6 +12,7 @@ RUN apt update && \
         neovim \
         openssh-client \
         openssh-server \
+	landscape-common \
         screen \
         bat \
         curl \
@@ -45,7 +46,9 @@ WORKDIR /root
 RUN mkdir -p ./code && mkdir -p ./data
 RUN mkdir -p /run/sshd
 
-COPY ./run.sh /etc/ssh/run.sh
-RUN chmod +x /etc/ssh/run.sh
 
-CMD /etc/ssh/run.sh
+COPY ./run.sh /etc/run.sh
+RUN chmod +x /etc/run.sh
+COPY ./sshd_config /etc/ssh/sshd_config
+RUN chmod 644 /etc/ssh/sshd_config
+CMD /etc/run.sh
