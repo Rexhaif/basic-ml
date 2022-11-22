@@ -4,10 +4,18 @@ set -e
 
 # Create the SSH directory if it doesn't exist
 mkdir -p ~/.ssh
+touch ~/.ssh/authorized_keys
+
+# Check if 'AUTHORIZED_KEYS' is set, if so, write it to ~/.ssh/authorized_keys file
+if [ -n "$AUTHORIZED_KEYS" ]; then
+    cat <<< $AUTHORIZED_KEYS > ~/.ssh/authorized_keys
+    # set permissions
+    chmod 600 ~/.ssh/authorized_keys
+fi
 
 # Check if "PUBLICK_KEY" is set, if so, write it to the authorized_keys file
 if [ -n "$PUBLIC_KEY" ]; then
-    echo "$PUBLIC_KEY" > ~/.ssh/authorized_keys
+    echo "$PUBLIC_KEY" >> ~/.ssh/authorized_keys
     # set permissions
     chmod 600 ~/.ssh/authorized_keys
 fi
