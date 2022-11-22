@@ -44,4 +44,4 @@ EXPOSE 22
 WORKDIR /root
 RUN mkdir -p ./notebooks && mkdir -p ./data
 RUN mkdir -p /run/sshd
-CMD /usr/sbin/sshd -d -p 2222
+CMD /usr/sbin/sshd -d -p 22
