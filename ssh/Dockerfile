@@ -45,7 +45,7 @@ WORKDIR /root
 RUN mkdir -p ./code && mkdir -p ./data
 RUN mkdir -p /run/sshd
 
-COPY ./run.sh ./.run.sh
-RUN chmod +x ./.run.sh
+COPY ./run.sh /etc/ssh/run.sh
+RUN chmod +x /etc/ssh/run.sh
 
-CMD ./.run.sh
+CMD /etc/ssh/run.sh
