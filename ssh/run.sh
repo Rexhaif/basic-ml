@@ -14,11 +14,11 @@ fi
 
 # Check if "PASSWORD" is set, if so, set the password for the root user
 if [ -n "$PASSWORD" ]; then
-    echo $PASSWORD | passwd --stdin root
+    echo -e "$PASSWORD\n$PASSWORD" | passwd root
 fi
 
 # Set correct permissions on the SSH directory
 chmod 700 ~/.ssh
 
 # Start SSH
-/usr/sbin/sshd -d -p 22
+/usr/sbin/sshd -D -e -p 22
