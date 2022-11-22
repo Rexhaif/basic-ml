@@ -92,3 +92,42 @@ jobs:
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:jupyter-$TAG \
             --file Dockerfile \
             .
+            
+  ssh-image:
+    runs-on: ubuntu-latest
+    needs: base-image
+    strategy:
+      matrix:
+        tag:
+          - cuda11.6-cudnn8-devel
+          - cuda11.6-cudnn8-runtime
+          - cuda11.6-devel
+          - cuda11.6-runtime
+          - cuda11.6
+          - cpu
+          
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & push
+        env:
+          TAG: ${{ matrix.tag }}
+        working-directory: ./ssh
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            --push \
+            --build-arg BASE_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:base-$TAG \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:ssh-$TAG \
+            --file Dockerfile \
+            .
