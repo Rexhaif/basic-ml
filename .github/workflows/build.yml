@@ -138,6 +138,8 @@ jobs:
       - jupyter-image
       - ssh-image
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
