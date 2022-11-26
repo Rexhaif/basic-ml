@@ -131,3 +131,16 @@ jobs:
             --tag ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml:ssh-$TAG \
             --file Dockerfile \
             .
+
+  update-description:
+    runs-on: ubuntu-latest
+    needs:
+      - jupyter-image
+      - ssh-image
+    steps:
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/basic-ml
