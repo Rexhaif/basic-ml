@@ -20,7 +20,7 @@ RUN apt update && \
     pip install -U \
         ipython \
         notebook \
-        jupyterlab
+        jupyterlab==3.6.5
 
 
 ENV NVM_DIR /usr/local/nvm
