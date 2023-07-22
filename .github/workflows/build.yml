@@ -45,16 +45,6 @@ jobs:
             tag: base-cuda11.3-runtime
           - image: nvidia/cuda:11.3.0-base-ubuntu20.04
             tag: base-cuda11.3
-          - image: nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
-            tag: base-cuda10.1-cudnn8-devel
-          - image: nvidia/cuda:10.1-cudnn8-runtime-ubuntu18.04
-            tag: base-cuda10.1-cudnn8-runtime
-          - image: nvidia/cuda:10.1-devel-ubuntu18.04
-            tag: base-cuda10.1-devel
-          - image: nvidia/cuda:10.1-runtime-ubuntu18.04
-            tag: base-cuda10.1-runtime
-          - image: nvidia/cuda:10.1-base-ubuntu18.04
-            tag: base-cuda10.1
           - image: ubuntu:20.04
             tag: base-cpu
           
@@ -106,11 +96,6 @@ jobs:
           - cuda11.3-devel
           - cuda11.3-runtime
           - cuda11.6
-          - cuda10.1-cudnn8-devel
-          - cuda10.1-cudnn8-runtime
-          - cuda10.1-devel
-          - cuda10.1-runtime
-          - cuda10.1
           - cpu
           
     steps:
@@ -160,11 +145,6 @@ jobs:
           - cuda11.3-devel
           - cuda11.3-runtime
           - cuda11.6
-          - cuda10.1-cudnn8-devel
-          - cuda10.1-cudnn8-runtime
-          - cuda10.1-devel
-          - cuda10.1-runtime
-          - cuda10.1
           - cpu
           
     steps:
