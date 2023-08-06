@@ -1,5 +1,5 @@
 # Basic ML
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rexhaif/basic-ml/build.yml?branch=main)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rexhaif/basic-ml/build.yml?branch=main&style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/rexhaif/basic-ml?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/rexhaif/basic-ml?style=for-the-badge)
 
