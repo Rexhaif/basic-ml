@@ -22,11 +22,11 @@ RUN apt-get update && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \ 
     apt-get install --yes --no-install-recommends \
-        python3.10 \
-        python3.10-dev \
-        python3.10-distutils
+        python3.11 \
+        python3.11-dev \
+        python3.11-distutils
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
 
 RUN wget --progress=dot:mega https://bootstrap.pypa.io/get-pip.py && python ./get-pip.py && rm -rf ./get-pip.py
 
